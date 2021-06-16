@@ -12,7 +12,7 @@ const kyber = new web3.eth.Contract(
   addresses.kyber.kyberNetworkProxy
 );
 
-const AMOUNT_ETH = 100;
+const AMOUNT_ETH = 1;
 const RECENT_ETH_PRICE = 230;
 const AMOUNT_ETH_WEI = web3.utils.toWei(AMOUNT_ETH.toString());
 const AMOUNT_DAI_WEI = web3.utils.toWei((AMOUNT_ETH * RECENT_ETH_PRICE).toString());
@@ -25,18 +25,18 @@ web3.eth.subscribe('newBlockHeaders')
         kyber
           .methods
           .getExpectedRate(
-            addresses.tokens.dai, 
-            '0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee', 
+            addresses.tokens.dai,
+            '0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee',
             AMOUNT_DAI_WEI
-          ) 
+          )
           .call(),
         kyber
           .methods
           .getExpectedRate(
-            '0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee', 
-            addresses.tokens.dai, 
+            '0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee',
+            addresses.tokens.dai,
             AMOUNT_ETH_WEI
-          ) 
+          )
           .call()
     ]);
     const kyberRates = {
@@ -49,4 +49,3 @@ web3.eth.subscribe('newBlockHeaders')
   .on('error', error => {
     console.log(error);
   });
-
